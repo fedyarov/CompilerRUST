@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Token.h"
 #include "Lexer.h"
 
 using namespace std;
