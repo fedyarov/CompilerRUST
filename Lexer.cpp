@@ -2,15 +2,61 @@
 
 Lexer::Lexer(char* file)
 {
-	ifstream code(file);
-	if (code.is_open()) {
-		string line;
+	ifstream file_with_code(file);
+	if (file_with_code.is_open()) {
 		char ch;
-		while (!code.eof()) {
-			code.get(ch);
-			line += ch;
+		while (!file_with_code.eof()) {
+			file_with_code.get(ch);
+			code += ch;
 		}
-		line[line.size()-1] = EOF;
-		cout << "Code have been written to string" << endl;
+		code[code.size()-1] = EOF;
+		cout << "INFO: Code have been written to string" << endl;
 	}
+}
+
+void Lexer::split()
+{
+	string temp_token;
+
+	for (char symbol : code) {
+		if (is_split_symbol(symbol)) {
+			if (!temp_token.empty()) {
+				Token* new_token = new Token(temp_token);
+				tokens.push_back(new_token);
+
+				temp_token.clear();
+			}
+			if (symbol != ' ' && symbol != 10 && symbol != 9) {
+				temp_token = symbol;
+				Token* new_token = new Token(temp_token);
+				tokens.push_back(new_token);
+				temp_token.clear();
+			}
+		}
+		else {
+			temp_token += symbol;
+		}
+	}
+}
+
+bool Lexer::is_split_symbol(char symbol)
+{
+	return symbol == '+' || symbol == '-' ||
+		symbol == '/' || symbol == '*' ||
+		symbol == '(' || symbol == ')' ||
+		symbol == '{' || symbol == '}' ||
+		symbol == '\"' || symbol == ',' ||
+		symbol == ' ' || symbol == '=' ||
+		symbol == '>' || symbol == '<' ||
+		symbol == ';' ||
+		symbol == 9 || // 9 - Horizontal Tabulation
+		symbol == 10; // 10 - Line Feed (enter)
+}
+
+void Lexer::print()
+{
+	for (const auto token : tokens) {
+		cout << token->get_lexeme() << " WITH TYPE " << token->get_type() << endl;
+	}
+	cout << "INFO: Token vector shown successfully" << endl;
 }
