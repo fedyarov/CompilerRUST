@@ -45,6 +45,13 @@ token_type Token::get_type()
 	if (lexeme == ",") {
 		return token_type::COMMA;
 	}
+	if (lexeme == ">") {
+		return token_type::MORE;
+	}
+	if (lexeme == "<") {
+		return token_type::LESS;
+	}
+
 	return token_type::UNDEFINED;
 }
 
