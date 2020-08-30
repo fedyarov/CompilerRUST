@@ -25,7 +25,7 @@ token_type Token::get_type()
 		return token_type::SLASH;
 	}
 	if (lexeme == "(") {
-		return token_type::RPAR;
+		return token_type::LPAR;
 	}
 	if (lexeme == ")") {
 		return token_type::RPAR;
