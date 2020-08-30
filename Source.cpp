@@ -9,5 +9,8 @@ int main(int argc, char* argv[])
 	char fileName[] = "test.txt";
 	Lexer lexer(fileName);
 
+	lexer.split();
+	lexer.print();
+
 	return 0;
 }
