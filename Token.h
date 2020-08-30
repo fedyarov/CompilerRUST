@@ -6,13 +6,18 @@ using namespace std;
 enum token_type 
 {
 	UNDEFINED,
-	NUMBER,
-	PLUS,
-	MINUS,
-	STAR,
-	SLASH,
-	LPAR, // (
-	RPAR, // )
+	NUMBER, 
+	PLUS,	 // +
+	MINUS,	 // -
+	EQUALLY, // =
+	STAR,    // *
+	SLASH,   // /
+	LPAR,    // (
+	RPAR,    // )
+	LBRACE,  // {
+	RBRACE,  // }
+	QUOTES,  // "
+	COMMA,   // ,
 };
 
 class Token
