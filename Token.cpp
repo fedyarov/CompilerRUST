@@ -35,10 +35,15 @@ token_type Token::get_type()
 
 bool Token::is_integer(const string& lexeme)
 {
-	for (const auto& symbol : lexeme) {
+	for (const auto symbol : lexeme) {
 		if (symbol < '0' || symbol > '9') {
 			return false;
 		}
 	}
 	return true;
+}
+
+string Token::get_lexeme()
+{
+	return this->lexeme;
 }
