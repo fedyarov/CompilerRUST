@@ -18,6 +18,9 @@ token_type Token::get_type()
 	if (lexeme == "-") {
 		return token_type::MINUS;
 	}
+	if (lexeme == "=") {
+		return token_type::EQUALLY;
+	}
 	if (lexeme == "*") {
 		return token_type::STAR;
 	}
@@ -29,6 +32,18 @@ token_type Token::get_type()
 	}
 	if (lexeme == ")") {
 		return token_type::RPAR;
+	}
+	if (lexeme == "{") {
+		return token_type::LBRACE;
+	}
+	if (lexeme == "}") {
+		return token_type::RBRACE;
+	}
+	if (lexeme == "\"") {
+		return token_type::QUOTES;
+	}
+	if (lexeme == ",") {
+		return token_type::COMMA;
 	}
 	return token_type::UNDEFINED;
 }
