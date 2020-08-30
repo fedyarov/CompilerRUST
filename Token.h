@@ -18,6 +18,8 @@ enum token_type
 	RBRACE,  // }
 	QUOTES,  // "
 	COMMA,   // ,
+	MORE,	 // >
+	LESS,	 // <
 };
 
 class Token
