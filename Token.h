@@ -23,6 +23,8 @@ public:
 	Token(const string& lexeme);
 
 	token_type get_type();
+	string get_lexeme();
+
 	bool is_integer(const string& lexeme);
 };
 
