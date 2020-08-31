@@ -1,5 +1,6 @@
 *.sln 
 *.vcxproj 
 *.vcxproj.* 
+log.txt
 /.vs 
 /Debug 
