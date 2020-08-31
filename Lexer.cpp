@@ -57,13 +57,17 @@ bool Lexer::is_split_symbol(char symbol)
 
 void Lexer::print() // Write to log file
 {
+	cout_log("------ TOKENS ------");
+	endl_log();
+
 	for (const auto token : tokens) {
 		cout_log(token->get_lexeme());
 		cout_log(" WITH TYPE ");
 		cout_log(token->get_type());
 		endl_log();
-		
 	}
+	endl_log();
+
 	cout << "INFO: Token vector writed successfully" << endl;
 }
 
