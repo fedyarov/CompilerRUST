@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include "Token.h"
+#include "Log.h"
 
 using namespace std;
 
