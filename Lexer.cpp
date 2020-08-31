@@ -1,6 +1,6 @@
 #include "Lexer.h"
 
-Lexer::Lexer(char* file)
+Lexer::Lexer(const char* file)
 {
 	ifstream file_with_code(file);
 	if (file_with_code.is_open()) {
@@ -12,6 +12,8 @@ Lexer::Lexer(char* file)
 		code[code.size()-1] = EOF;
 		cout << "INFO: Code have been written to string" << endl;
 	}
+
+	current_token_index = 0;
 }
 
 void Lexer::split()
@@ -63,4 +65,21 @@ void Lexer::print() // Write to log file
 		
 	}
 	cout << "INFO: Token vector writed successfully" << endl;
+}
+
+void Lexer::next_token()
+{
+	if (current_token_index < tokens.size() - 1) {
+		current_token_index++;
+	}
+}
+
+token_type Lexer::current_token_type()
+{
+	return tokens[current_token_index]->get_type();
+}
+
+Token* Lexer::current_token()
+{
+	return tokens[current_token_index];
 }
