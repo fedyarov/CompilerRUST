@@ -53,10 +53,9 @@ bool Lexer::is_split_symbol(char symbol)
 		symbol == 10; // 10 - Line Feed (enter)
 }
 
-void Lexer::print()
+void Lexer::print() // Write to log file
 {
 	for (const auto token : tokens) {
-		//cout << token->get_lexeme() << " WITH TYPE " << token->get_type() << endl;
 		cout_log(token->get_lexeme());
 		cout_log(" WITH TYPE ");
 		cout_log(token->get_type());
