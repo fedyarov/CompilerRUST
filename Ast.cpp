@@ -75,8 +75,14 @@ void Ast::print_recursive(Node* current_node, size_t level)
 	print_recursive(current_node->operand2, level + 1);
 	print_recursive(current_node->operand3, level + 1);
 	print_recursive(current_node->operand4, level + 1);
+
 }
 
 void Ast::print() {
+	cout_log("------ AST ------");
+	endl_log();
 	print_recursive(tree, 0);
+	endl_log();
+
+	cout << "INFO: AST writed successfully" << endl;
 }
