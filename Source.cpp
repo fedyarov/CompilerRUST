@@ -5,10 +5,12 @@ using namespace std;
 
 int main(int argc, char* argv[]) 
 {
-	char fileName[] = "test.txt";
+	char fileName[] = "AST_test.txt";
 	Parser parser(fileName);
 
 	create_new_log();
+
+	parser.parse();
 
 	return 0;
 }
