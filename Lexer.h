@@ -12,11 +12,16 @@ class Lexer
 {
 	string code;
 	vector<Token*> tokens;
+	size_t current_token_index;
 public:
-	Lexer(char* file);
+	Lexer(const char* file);
 
 	void split();
 	bool is_split_symbol(char symbol);
+
+	void next_token();
+	token_type current_token_type();
+	Token* current_token();
 
 	void print();
 };
