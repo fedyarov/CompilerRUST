@@ -23,42 +23,119 @@ void Parser::parse()
 
 Node* Parser::program()
 {
-	return nullptr;
+	Node* statement_node = statement();
+	return statement_node;
 }
 
 Node* Parser::statement()
 {
-	return nullptr;
+	Node* expression_node = expression();
+	return expression_node;
 }
 
 Node* Parser::expression()
 {
-	return nullptr;
+	Node* additive_expression_node = additive_expression();
+	return additive_expression_node;
 }
 
 Node* Parser::additive_expression()
 {
-	return nullptr;
+	Node* multiplicative_node = multiplicative_expression();
+
+	if (lex->current_token_type() == token_type::PLUS) {
+		lex->next_token();
+
+		Node* additive_temp_node = additive_expression();
+
+		Node* additive = new Node(node_type::ADD, multiplicative_node,
+			additive_temp_node);
+
+		return additive;
+	}
+	else if (lex->current_token_type() == token_type::MINUS) {
+		lex->next_token();
+
+		Node* additive_temp_node = additive_expression();
+
+		Node* additive = new Node(node_type::SUB, multiplicative_node,
+			additive_temp_node);
+
+		return additive;
+	}
+	return multiplicative_node;
 }
 
 Node* Parser::multiplicative_expression()
 {
-	return nullptr;
+	Node* primary_node = primary_expression();
+
+	if (lex->current_token_type() == token_type::STAR) {
+		lex->next_token();
+
+		Node* multiplicative_temp_node = multiplicative_expression();
+
+		Node* multiplicative_expression = new Node(node_type::MUL, primary_node,
+			multiplicative_temp_node);
+
+		return multiplicative_expression;
+	}
+	else if (lex->current_token_type() == token_type::SLASH) {
+		lex->next_token();
+
+		Node* multiplicative_temp_node = multiplicative_expression();
+
+		Node* multiplicative_expression = new Node(node_type::DIV, primary_node,
+			multiplicative_temp_node);
+
+		return multiplicative_expression;
+	}
+	return primary_node;
 }
 
 Node* Parser::primary_expression()
 {
+	if (lex->current_token_type() == token_type::NUMBER) {
+		Node* number_node = number();
+		
+		return number_node;
+	}
+	else if (lex->current_token_type() == token_type::LPAR) {
+		Node* parenthesized_expression_node = parenthesized_expression();
+
+		return parenthesized_expression_node;
+	}
 	return nullptr;
 }
 
 Node* Parser::parenthesized_expression()
 {
-	return nullptr;
+	if (lex->current_token_type() != token_type::LPAR) {
+		error("'(' expected");
+	}
+	lex->next_token();
+
+	Node* expression_node = expression();
+
+	if (lex->current_token_type() != token_type::RPAR) {
+		error("')' expected");
+	}
+
+	lex->next_token();
+
+	return expression_node;
 }
 
 Node* Parser::number()
 {
-	return nullptr;
+	if (lex->current_token_type() != token_type::NUMBER) {
+		error("Number expected!");
+	}
+	string number_str = lex->current_token()->get_lexeme();
+	lex->next_token();
+
+	Node* number_node = new Node(node_type::CONSTANT, number_str);
+	return number_node;
 }
 
 void Parser::error(const string message)
