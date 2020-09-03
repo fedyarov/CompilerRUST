@@ -1,0 +1,18 @@
+fn main() 
+{
+	let mut a=10;
+	let mut b=5;
+	let mut c;
+
+	c=a+b;
+
+	println!("{}",c);
+
+	if c>a {
+		println!("c>a");
+	}
+	else {
+		println!("c<a");
+	}
+
+}
