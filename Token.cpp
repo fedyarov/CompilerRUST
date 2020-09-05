@@ -9,17 +9,35 @@ Token::Token(const string& lexeme)
 
 token_type Token::get_type()
 {
+	if (lexeme == "let") {
+		return token_type::LET;
+	}
+	if (lexeme == "mut") {
+		return token_type::MUT;
+	}
 	if (is_integer(lexeme)) {
 		return token_type::NUMBER;
+	}
+	if (lexeme == "true") {
+		return token_type::TRUE;
+	}
+	if (lexeme == "false") {
+		return token_type::FALSE;
+	}
+	if (lexeme == "if") {
+		return token_type::IF;
+	}
+	if (lexeme == "else") {
+		return token_type::ELSE;
+	}
+	if (lexeme == "=") {
+		return token_type::EQUALLY;
 	}
 	if (lexeme == "+") {
 		return token_type::PLUS;
 	}
 	if (lexeme == "-") {
 		return token_type::MINUS;
-	}
-	if (lexeme == "=") {
-		return token_type::EQUALLY;
 	}
 	if (lexeme == "*") {
 		return token_type::STAR;
@@ -45,14 +63,31 @@ token_type Token::get_type()
 	if (lexeme == ",") {
 		return token_type::COMMA;
 	}
+	if (lexeme == ";") {
+		return token_type::SEMICOLON;
+	}
 	if (lexeme == ">") {
 		return token_type::MORE;
 	}
 	if (lexeme == "<") {
 		return token_type::LESS;
 	}
+	if (lexeme == "|") {
+		return token_type::OR;
+	}
+	if (lexeme == "&") {
+		return token_type::AND;
+	}
+	if (lexeme == "println!") {
+		return token_type::PRINTLN;
+	}
 
-	return token_type::UNDEFINED;
+	if (is_correct_identifier(lexeme)) {
+		return token_type::IDENTIFIER;
+	}
+	else {
+		throw logic_error("Lexical error! Incorrect identifier " + lexeme + " !");
+	}
 }
 
 bool Token::is_integer(const string& lexeme)
@@ -62,6 +97,21 @@ bool Token::is_integer(const string& lexeme)
 			return false;
 		}
 	}
+	return true;
+}
+
+bool Token::is_correct_identifier(const string& lexeme)
+{
+	if (!isalpha(lexeme[0]) && lexeme[0] != '_') {
+		return false;
+	}
+
+	for (const auto& symbol : lexeme) {
+		if (!isalpha(symbol) && !isdigit(symbol) && symbol != '_') {
+			return false;
+		}
+	}
+
 	return true;
 }
 
