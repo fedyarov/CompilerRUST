@@ -21,6 +21,22 @@ void Parser::parse()
 	ast->print(); // Write AST to the log file
 }
 
+string Parser::eat(token_type type)
+{
+	if (!tryEat(type)) {
+		error(to_string((int)type) + " expected!");
+	}
+
+	string value = lex->current_token_value();
+
+	return value;
+}
+
+bool Parser::tryEat(token_type type)
+{
+	return lex->current_token_type() == type;
+}
+
 Node* Parser::program()
 {
 	Node* statement_node = statement();
@@ -29,13 +45,38 @@ Node* Parser::program()
 
 Node* Parser::statement()
 {
-	Node* expression_node = expression();
-	return expression_node;
+	if (tryEat(token_type::LBRACE)) {
+		Node* compound_node = compound_statement();
+		return compound_node;
+	}
+	else{
+		Node* expression_node = expression();
+		return expression_node;
+	}
+}
+
+Node* Parser::compound_statement()
+{
+	lex->next_token();
+
+	Node* statement_node = nullptr;
+
+	while (!tryEat(token_type::RBRACE)) {
+		statement_node = new Node(node_type::SEQ, statement());
+
+		if (!tryEat(token_type::RBRACE)) {
+			statement_node->operand2 = new Node(node_type::SEQ, statement());
+		}
+	}
+	lex->next_token();
+	
+	return statement_node;
 }
 
 Node* Parser::expression()
 {
 	Node* additive_expression_node = additive_expression();
+
 	return additive_expression_node;
 }
 
@@ -43,7 +84,7 @@ Node* Parser::additive_expression()
 {
 	Node* multiplicative_node = multiplicative_expression();
 
-	if (lex->current_token_type() == token_type::PLUS) {
+	if (tryEat(token_type::PLUS)) {
 		lex->next_token();
 
 		Node* additive_temp_node = additive_expression();
@@ -53,7 +94,7 @@ Node* Parser::additive_expression()
 
 		return additive;
 	}
-	else if (lex->current_token_type() == token_type::MINUS) {
+	else if (tryEat(token_type::MINUS)) { 
 		lex->next_token();
 
 		Node* additive_temp_node = additive_expression();
@@ -63,6 +104,7 @@ Node* Parser::additive_expression()
 
 		return additive;
 	}
+
 	return multiplicative_node;
 }
 
@@ -70,7 +112,7 @@ Node* Parser::multiplicative_expression()
 {
 	Node* primary_node = primary_expression();
 
-	if (lex->current_token_type() == token_type::STAR) {
+	if (tryEat(token_type::STAR)) {
 		lex->next_token();
 
 		Node* multiplicative_temp_node = multiplicative_expression();
@@ -80,7 +122,7 @@ Node* Parser::multiplicative_expression()
 
 		return multiplicative_expression;
 	}
-	else if (lex->current_token_type() == token_type::SLASH) {
+	else if (tryEat(token_type::SLASH)) {
 		lex->next_token();
 
 		Node* multiplicative_temp_node = multiplicative_expression();
@@ -95,32 +137,28 @@ Node* Parser::multiplicative_expression()
 
 Node* Parser::primary_expression()
 {
-	if (lex->current_token_type() == token_type::NUMBER) {
+	if (tryEat(token_type::NUMBER)) {
 		Node* number_node = number();
 		
 		return number_node;
 	}
-	else if (lex->current_token_type() == token_type::LPAR) {
+	else if (tryEat(token_type::LPAR)) {
 		Node* parenthesized_expression_node = parenthesized_expression();
 
 		return parenthesized_expression_node;
 	}
-	return nullptr;
+	
+	error("Primary_expression expected");
 }
 
 Node* Parser::parenthesized_expression()
 {
-	if (lex->current_token_type() != token_type::LPAR) {
-		error("'(' expected");
-	}
+	eat(token_type::LPAR);
 	lex->next_token();
-
+	
 	Node* expression_node = expression();
 
-	if (lex->current_token_type() != token_type::RPAR) {
-		error("')' expected");
-	}
-
+	eat(token_type::RPAR);
 	lex->next_token();
 
 	return expression_node;
@@ -128,9 +166,8 @@ Node* Parser::parenthesized_expression()
 
 Node* Parser::number()
 {
-	if (lex->current_token_type() != token_type::NUMBER) {
-		error("Number expected!");
-	}
+	eat(token_type::NUMBER);
+
 	string number_str = lex->current_token()->get_lexeme();
 	lex->next_token();
 

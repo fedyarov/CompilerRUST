@@ -7,6 +7,8 @@ enum node_type {
 	PROG, // HEAD OF TREE
 	EXPR, // EXPRESSION
 
+	SEQ, // One statement
+
 	CONSTANT, 
 	ADD, // +
 	SUB, // -

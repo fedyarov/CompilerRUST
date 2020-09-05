@@ -2,6 +2,8 @@
 #include <fstream>
 #include <iostream>
 
+#define LOG_PATH "Log/log.txt"
+
 using namespace std;
 
 void create_new_log();

@@ -1,0 +1,23 @@
+// EXPRESSIONS - Выражения
+// STATEMENTS - Инструкции. Стоят в фигурных скобках {}
+// DECLARATIONS - Объявления
+
+<program> ::= <statement>
+
+<statement> ::= <expression>
+
+<expression> ::= <additive_expression>
+
+<additive_expression> ::= <multiplicative_expression> 
+                        | <multiplicative_expression> "+" <additive_expression>
+                        | <multiplicative_expression> "-" <additive_expression>
+
+<multiplicative_expression> ::= <primary_expression> 
+                              | <primary_expression> "*" <multiplicative_expression>
+                              | <primary_expression> "/" <multiplicative_expression>
+
+<primary_expression> ::= <number> | <parenthesized_expression>
+
+<parenthesized_expression> ::= "(", <expression>,")"
+
+<number> ::= число

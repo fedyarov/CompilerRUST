@@ -87,3 +87,8 @@ Token* Lexer::current_token()
 {
 	return tokens[current_token_index];
 }
+
+string Lexer::current_token_value()
+{
+	return tokens[current_token_index]->get_lexeme();
+}

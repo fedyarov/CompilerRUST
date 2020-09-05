@@ -2,7 +2,7 @@
 
 void create_new_log()
 {
-	ofstream log_file("log.txt");
+	ofstream log_file(LOG_PATH);
 	if (log_file.is_open()) {
 		log_file.close();
 
@@ -12,7 +12,7 @@ void create_new_log()
 
 void cout_log(string message)
 {
-	ofstream log_file("log.txt", ios::app);
+	ofstream log_file(LOG_PATH, ios::app);
 	if (log_file.is_open()) {
 		log_file << message;
 
@@ -22,7 +22,7 @@ void cout_log(string message)
 
 void cout_log(int num)
 {
-	ofstream log_file("log.txt", ios::app);
+	ofstream log_file(LOG_PATH, ios::app);
 	if (log_file.is_open()) {
 		log_file << num;
 
@@ -32,7 +32,7 @@ void cout_log(int num)
 
 void endl_log()
 {
-	ofstream log_file("log.txt", ios::app);
+	ofstream log_file(LOG_PATH, ios::app);
 	if (log_file.is_open()) {
 		log_file << endl;
 

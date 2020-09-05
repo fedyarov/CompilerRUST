@@ -5,12 +5,17 @@ using namespace std;
 
 int main(int argc, char* argv[]) 
 {
-	char fileName[] = "AST_test.txt";
+	char fileName[] = "Tests/test2.txt";
 	Parser parser(fileName);
 
 	create_new_log();
 
-	parser.parse();
+	try {
+		parser.parse();
+	}
+	catch (const logic_error& error) {
+		cout << error.what() << endl;
+	}
 
 	return 0;
 }

@@ -22,6 +22,7 @@ public:
 	void next_token();
 	token_type current_token_type();
 	Token* current_token();
+	string current_token_value();
 
 	void print();
 };

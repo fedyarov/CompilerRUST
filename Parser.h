@@ -16,9 +16,12 @@ public:
 	~Parser();
 
 	void parse();
+	string eat(token_type type);
+	bool tryEat(token_type type);
 
 	Node* program();
 	Node* statement();
+	Node* compound_statement();
 	Node* expression();
 	Node* additive_expression();
 	Node* multiplicative_expression();
