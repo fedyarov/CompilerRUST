@@ -2,6 +2,6 @@
 *.vcxproj 
 *.vcxproj.* 
 log.txt
-AST_test.txt
+*test*.txt
 /.vs 
 /Debug 
