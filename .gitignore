@@ -2,6 +2,6 @@
 *.vcxproj 
 *.vcxproj.* 
 log.txt
-*test*.txt
+/Tests
 /.vs 
 /Debug 
