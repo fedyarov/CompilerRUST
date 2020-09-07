@@ -1,10 +1,15 @@
 // EXPRESSIONS - Выражения
-// STATEMENTS - Инструкции. Стоят в фигурных скобках {}
+// STATEMENTS - Инструкции
 // DECLARATIONS - Объявления
 
 <program> ::= <statement>
 
-<statement> ::= <expression>
+<statement> ::= <compound_statement> | <declaration>, ";" | <expression>, ";"
+				| <selection_statement>
+
+<compound_statement> ::= "{", <statement>, "}"
+
+<selection_statement> ::= "if", <expression>, <compound_statement> 
 
 <expression> ::= <additive_expression>
 
