@@ -51,6 +51,10 @@ Node* Parser::statement()
 	}
 	else{
 		Node* expression_node = expression();
+
+		eat(token_type::SEMICOLON);
+		lex->next_token();
+
 		return expression_node;
 	}
 }
@@ -59,14 +63,15 @@ Node* Parser::compound_statement()
 {
 	lex->next_token();
 
-	Node* statement_node = nullptr;
+	Node* statement_node = new Node(node_type::SEQ);
+	Node* last_node = statement_node;
+	if (!tryEat(token_type::RBRACE)) last_node->operand1 = statement();
 
 	while (!tryEat(token_type::RBRACE)) {
-		statement_node = new Node(node_type::SEQ, statement());
 
-		if (!tryEat(token_type::RBRACE)) {
-			statement_node->operand2 = new Node(node_type::SEQ, statement());
-		}
+		last_node->operand2 = new Node(node_type::SEQ, statement());
+
+		last_node = last_node->operand2;
 	}
 	lex->next_token();
 	
@@ -171,7 +176,7 @@ Node* Parser::number()
 	string number_str = lex->current_token()->get_lexeme();
 	lex->next_token();
 
-	Node* number_node = new Node(node_type::CONSTANT, number_str);
+	Node* number_node = new Node(node_type::CONSTANT, nullptr, nullptr, number_str);
 	return number_node;
 }
 

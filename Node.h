@@ -23,10 +23,8 @@ public:
 	node_type type;
 public:
 
-	Node(node_type type, const string value ="", Node* operand1 = nullptr,
-		Node* operand2 = nullptr, Node* operand3 = nullptr, Node* operand4 = nullptr);
 	Node(node_type type, Node* operand1 = nullptr, Node* operand2 = nullptr, 
-		Node* operand3 = nullptr, Node* operand4 = nullptr);
+		const string value="", Node* operand3 = nullptr, Node* operand4 = nullptr);
 
 	Node* operand1;
 	Node* operand2;
