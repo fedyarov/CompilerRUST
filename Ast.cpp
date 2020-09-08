@@ -47,6 +47,14 @@ void Ast::print_recursive(Node* current_node, size_t level)
 		cout_log("SEQ");
 		break;
 	}
+	case node_type::IF: {
+		cout_log("IF");
+		break;
+	}
+	case node_type::ELSE: {
+		cout_log("ELSE");
+		break;
+	}
 	case node_type::CONSTANT:{
 		cout_log("CONST ");
 

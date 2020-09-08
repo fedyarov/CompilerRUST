@@ -49,6 +49,11 @@ Node* Parser::statement()
 		Node* compound_node = compound_statement();
 		return compound_node;
 	}
+	else if (tryEat(token_type::IF_TOKEN)) {
+		Node* selection_node = selection_statement();
+
+		return selection_node;
+	}
 	else{
 		Node* expression_node = expression();
 
@@ -57,6 +62,26 @@ Node* Parser::statement()
 
 		return expression_node;
 	}
+}
+
+Node* Parser::selection_statement()
+{
+	lex->next_token();
+
+	Node* expression_node = expression();
+	Node* compound_node = compound_statement();
+
+	Node* selection_node = new Node(node_type::IF, expression_node, compound_node);
+
+	if (tryEat(token_type::ELSE_TOKEN)) {
+		lex->next_token();
+
+		Node* compound_else_node = compound_statement();
+		Node* else_node = new Node(node_type::ELSE, compound_else_node);
+		selection_node->operand3 = else_node;
+	}
+
+	return selection_node;
 }
 
 Node* Parser::compound_statement()

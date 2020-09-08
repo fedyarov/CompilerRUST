@@ -22,6 +22,7 @@ public:
 	Node* program();
 	Node* statement();
 	Node* compound_statement();
+	Node* selection_statement();
 	Node* expression();
 	Node* additive_expression();
 	Node* multiplicative_expression();

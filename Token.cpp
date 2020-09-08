@@ -25,10 +25,10 @@ token_type Token::get_type()
 		return token_type::FALSE;
 	}
 	if (lexeme == "if") {
-		return token_type::IF;
+		return token_type::IF_TOKEN;
 	}
 	if (lexeme == "else") {
-		return token_type::ELSE;
+		return token_type::ELSE_TOKEN;
 	}
 	if (lexeme == "=") {
 		return token_type::EQUALLY;

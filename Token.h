@@ -16,8 +16,8 @@ enum token_type
 	TRUE,
 	FALSE,
 
-	IF,
-	ELSE,
+	IF_TOKEN,
+	ELSE_TOKEN,
 
 	EQUALLY, // =
 
