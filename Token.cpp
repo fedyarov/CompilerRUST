@@ -16,7 +16,7 @@ token_type Token::get_type()
 		return token_type::MUT;
 	}
 	if (is_integer(lexeme)) {
-		return token_type::NUMBER;
+		return token_type::NUMBER_TOKEN;
 	}
 	if (lexeme == "true") {
 		return token_type::TRUE;
@@ -29,6 +29,9 @@ token_type Token::get_type()
 	}
 	if (lexeme == "else") {
 		return token_type::ELSE_TOKEN;
+	}
+	if (lexeme == "for") {
+		return token_type::FOR_TOKEN;
 	}
 	if (lexeme == "=") {
 		return token_type::EQUALLY;

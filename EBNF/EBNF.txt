@@ -7,9 +7,12 @@
 <statement> ::= <compound_statement> | <declaration>, ";" | <expression>, ";"
 				| <selection_statement>
 
+<declaration> ::= "let", "mut", <identifier>, ";"
+
 <compound_statement> ::= "{", <statement>, "}"
 
-<selection_statement> ::= "if", <expression>, <compound_statement> 
+<selection_statement> ::= "if", <expression>, <compound_statement>,
+						 ["else", <compound_statement>]
 
 <expression> ::= <additive_expression>
 
@@ -26,3 +29,5 @@
 <parenthesized_expression> ::= "(", <expression>,")"
 
 <number> ::= число
+
+<identifier> ::= название переменной

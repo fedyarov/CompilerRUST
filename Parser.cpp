@@ -49,19 +49,38 @@ Node* Parser::statement()
 		Node* compound_node = compound_statement();
 		return compound_node;
 	}
+	else if (tryEat(token_type::LET)) {
+		Node* declaration_node = new Node(node_type::SET, declaration());
+
+		eat(token_type::SEMICOLON);
+		lex->next_token();
+
+		return declaration_node;
+	}
 	else if (tryEat(token_type::IF_TOKEN)) {
 		Node* selection_node = selection_statement();
 
 		return selection_node;
 	}
 	else{
-		Node* expression_node = expression();
+		Node* expression_node = new Node(node_type::EXPR, expression());
 
 		eat(token_type::SEMICOLON);
 		lex->next_token();
 
 		return expression_node;
 	}
+}
+
+Node* Parser::declaration() // Создать таблицу переменных
+{
+	lex->next_token();
+	eat(token_type::MUT);
+	lex->next_token();
+
+	Node* identifier_node = identifier();
+
+	return identifier_node;
 }
 
 Node* Parser::selection_statement()
@@ -167,7 +186,7 @@ Node* Parser::multiplicative_expression()
 
 Node* Parser::primary_expression()
 {
-	if (tryEat(token_type::NUMBER)) {
+	if (tryEat(token_type::NUMBER_TOKEN)) {
 		Node* number_node = number();
 		
 		return number_node;
@@ -196,13 +215,24 @@ Node* Parser::parenthesized_expression()
 
 Node* Parser::number()
 {
-	eat(token_type::NUMBER);
+	eat(token_type::NUMBER_TOKEN);
 
 	string number_str = lex->current_token()->get_lexeme();
 	lex->next_token();
 
-	Node* number_node = new Node(node_type::CONSTANT, nullptr, nullptr, number_str);
+	Node* number_node = new Node(node_type::NUMBER, nullptr, nullptr, number_str);
 	return number_node;
+}
+
+Node* Parser::identifier()
+{
+	eat(token_type::IDENTIFIER);
+
+	string variable_str = lex->current_token()->get_lexeme();
+	lex->next_token();
+
+	Node* identifier_node = new Node(node_type::VARIABLE, nullptr, nullptr, variable_str);
+	return identifier_node;
 }
 
 void Parser::error(const string message)

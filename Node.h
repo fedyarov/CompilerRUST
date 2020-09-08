@@ -9,10 +9,15 @@ enum node_type {
 
 	SEQ, // One statement
 
+	SET,
+
 	IF, 
 	ELSE,
 
-	CONSTANT, 
+	FOR,
+
+	VARIABLE,
+	NUMBER, 
 	ADD, // +
 	SUB, // -
 	MUL, // *

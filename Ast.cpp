@@ -47,6 +47,10 @@ void Ast::print_recursive(Node* current_node, size_t level)
 		cout_log("SEQ");
 		break;
 	}
+	case node_type::SET: {
+		cout_log("SET");
+		break;
+	}
 	case node_type::IF: {
 		cout_log("IF");
 		break;
@@ -55,9 +59,18 @@ void Ast::print_recursive(Node* current_node, size_t level)
 		cout_log("ELSE");
 		break;
 	}
-	case node_type::CONSTANT:{
-		cout_log("CONST ");
-
+	case node_type::FOR: {
+		cout_log("FOR");
+	}
+	case node_type::VARIABLE: {
+		cout_log("VARIABLE ");
+		cout_log("(");
+		cout_log(current_node->value);
+		cout_log(")");
+		break;
+	}
+	case node_type::NUMBER:{
+		cout_log("NUMBER ");
 		cout_log("(");
 		cout_log(current_node->value);
 		cout_log(")");

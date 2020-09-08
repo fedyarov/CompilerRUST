@@ -11,13 +11,15 @@ enum token_type
 	LET,
 	MUT,
 
-	NUMBER,
+	NUMBER_TOKEN,
 
 	TRUE,
 	FALSE,
 
 	IF_TOKEN,
 	ELSE_TOKEN,
+
+	FOR_TOKEN,
 
 	EQUALLY, // =
 

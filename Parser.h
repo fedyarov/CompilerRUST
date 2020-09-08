@@ -21,6 +21,7 @@ public:
 
 	Node* program();
 	Node* statement();
+	Node* declaration();
 	Node* compound_statement();
 	Node* selection_statement();
 	Node* expression();
@@ -29,6 +30,7 @@ public:
 	Node* primary_expression();
 	Node* parenthesized_expression();
 	Node* number();
+	Node* identifier();
 
 	void error(const string message);
 };
