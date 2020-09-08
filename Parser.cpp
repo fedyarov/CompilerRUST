@@ -50,16 +50,15 @@ Node* Parser::statement()
 		return compound_node;
 	}
 	else if (tryEat(token_type::LET)) {
-		Node* declaration_node = new Node(node_type::SET, declaration());
-
-		eat(token_type::SEMICOLON);
-		lex->next_token();
-
+		Node* declaration_node = new Node(node_type::DCLRT, declaration());
 		return declaration_node;
+	}
+	else if (tryEat(token_type::IDENTIFIER)) {
+		Node* assign_node = set();
+		return assign_node;
 	}
 	else if (tryEat(token_type::IF_TOKEN)) {
 		Node* selection_node = selection_statement();
-
 		return selection_node;
 	}
 	else{
@@ -80,7 +79,26 @@ Node* Parser::declaration() // Создать таблицу переменных
 
 	Node* identifier_node = identifier();
 
+	eat(token_type::SEMICOLON);
+	lex->next_token();
+
 	return identifier_node;
+}
+
+Node* Parser::set()
+{
+	Node* identifier_node = identifier();
+	
+	eat(token_type::EQUALLY);
+	lex->next_token();
+
+	Node* expression_node = expression();
+	Node* set_node = new Node(node_type::SET, identifier_node, expression_node);
+
+	eat(token_type::SEMICOLON);
+	lex->next_token();
+	
+	return set_node;
 }
 
 Node* Parser::selection_statement()
@@ -190,6 +208,11 @@ Node* Parser::primary_expression()
 		Node* number_node = number();
 		
 		return number_node;
+	}
+	else if (tryEat(token_type::IDENTIFIER)) {
+		Node* identifier_node = identifier();
+
+		return identifier_node;
 	}
 	else if (tryEat(token_type::LPAR)) {
 		Node* parenthesized_expression_node = parenthesized_expression();

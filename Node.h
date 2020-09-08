@@ -6,10 +6,11 @@ using namespace std;
 enum node_type {
 	PROG, // HEAD OF TREE
 	EXPR, // EXPRESSION
+	DCLRT, // DECLARATION
 
 	SEQ, // One statement
 
-	SET,
+	SET, // =
 
 	IF, 
 	ELSE,
@@ -18,6 +19,7 @@ enum node_type {
 
 	VARIABLE,
 	NUMBER, 
+
 	ADD, // +
 	SUB, // -
 	MUL, // *
