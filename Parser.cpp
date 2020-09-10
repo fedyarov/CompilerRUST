@@ -65,13 +65,9 @@ Node* Parser::statement()
 		Node* selection_node = selection_statement();
 		return selection_node;
 	}
-	else{
-		Node* expression_node = new Node(node_type::EXPR, expression());
-
-		eat(token_type::SEMICOLON);
-		lex->next_token();
-
-		return expression_node;
+	else if (tryEat(token_type::FOR_TOKEN)) {
+		Node* cycle_for_node = cycle_for();
+		return cycle_for_node;
 	}
 }
 
@@ -123,6 +119,31 @@ Node* Parser::selection_statement()
 	}
 
 	return selection_node;
+}
+
+Node* Parser::cycle_for()
+{
+	lex->next_token();
+
+	Node* identifier_node = identifier();
+
+	eat(token_type::IN);
+	lex->next_token();
+
+	Node* additive_first_node = additive_expression();
+
+	eat(token_type::DOUBLE_POINT);
+	lex->next_token();
+
+	Node* additive_second_node = additive_expression();
+
+	eat(token_type::LBRACE);
+	Node* compound_node = compound_statement();
+
+	Node* cycle_for_node = new Node(node_type::FOR, identifier_node, additive_first_node,
+		"", additive_second_node, compound_node);
+
+	return cycle_for_node;
 }
 
 Node* Parser::compound_statement()

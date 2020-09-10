@@ -33,6 +33,12 @@ token_type Token::get_type()
 	if (lexeme == "for") {
 		return token_type::FOR_TOKEN;
 	}
+	if (lexeme == "in") {
+		return token_type::IN;
+	}
+	if (lexeme == "..") {
+		return token_type::DOUBLE_POINT;
+	}
 	if (lexeme == "=") {
 		return token_type::EQUALLY;
 	}

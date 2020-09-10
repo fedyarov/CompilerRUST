@@ -26,6 +26,7 @@ public:
 	Node* set();
 	Node* compound_statement();
 	Node* selection_statement();
+	Node* cycle_for();
 	Node* expression();
 	Node* additive_expression();
 	Node* multiplicative_expression();

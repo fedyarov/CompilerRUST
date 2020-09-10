@@ -2,12 +2,19 @@
 	let mut a;
 	let mut b;
 	let mut c;
+
 	a=0;
+
 	if a+1{
 		b=a;
 		a=1;
 	}
 	else{
 		b=a+1;
+	}
+
+	for c in 0 .. 5{
+		a=a+1;
+		b=b+1;
 	}
 }

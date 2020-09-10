@@ -19,7 +19,9 @@ enum token_type
 	IF_TOKEN,
 	ELSE_TOKEN,
 
-	FOR_TOKEN,
+	FOR_TOKEN, // for
+	IN, // in
+	DOUBLE_POINT, // ..
 
 	EQUALLY, // =
 

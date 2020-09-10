@@ -65,6 +65,7 @@ void Ast::print_recursive(Node* current_node, size_t level)
 	}
 	case node_type::FOR: {
 		cout_log("FOR");
+		break;
 	}
 	case node_type::VARIABLE: {
 		cout_log("VARIABLE ");
