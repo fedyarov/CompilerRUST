@@ -1,12 +1,13 @@
 {
 	let mut a;
-	a=6;
-	a=a+1;
+	let mut b;
+	let mut c;
+	a=0;
 	if a+1{
-		5+1;
-		4+1;
+		b=a;
+		a=1;
 	}
 	else{
-		3+a;
+		b=a+1;
 	}
 }

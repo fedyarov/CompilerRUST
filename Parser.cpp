@@ -4,6 +4,7 @@ Parser::Parser(const char* file_path)
 {
 	lex = new Lexer(file_path);
 	ast = new Ast();
+	var_table = new Variable_table();
 }
 
 Parser::~Parser()
@@ -19,6 +20,9 @@ void Parser::parse()
 
 	ast->tree = program(); // Call Recursive descent parser
 	ast->print(); // Write AST to the log file
+
+	var_table->designate_variables_recursive(ast->tree); // fill the var_table
+	var_table->print_vars(); // Write all vars to the log file
 }
 
 string Parser::eat(token_type type)

@@ -11,6 +11,7 @@ class Parser
 {
 	Lexer* lex;
 	Ast* ast;
+	Variable_table* var_table;
 public:
 	Parser(const char* file_path);
 	~Parser();

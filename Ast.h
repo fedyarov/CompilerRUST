@@ -1,6 +1,7 @@
 #pragma once
 #include "Node.h"
 #include "Log.h"
+#include "Variable_table.h"
 
 class Ast
 {
