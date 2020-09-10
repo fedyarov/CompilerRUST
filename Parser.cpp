@@ -92,8 +92,8 @@ Node* Parser::set()
 	eat(token_type::EQUALLY);
 	lex->next_token();
 
-	Node* expression_node = expression();
-	Node* set_node = new Node(node_type::SET, identifier_node, expression_node);
+	Node* additive_node = additive_expression();
+	Node* set_node = new Node(node_type::SET, identifier_node, additive_node);
 
 	eat(token_type::SEMICOLON);
 	lex->next_token();
