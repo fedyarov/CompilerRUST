@@ -23,7 +23,8 @@ enum token_type
 	IN, // in
 	DOUBLE_POINT, // ..
 
-	EQUALLY, // =
+	SET_TOKEN, // =
+	EQUALITY_TOKEN, // ==
 
 	PLUS,	 // +
 	MINUS,	 // -
@@ -39,8 +40,8 @@ enum token_type
 	COMMA,   // ,
 	SEMICOLON, // ;
 
-	MORE,	 // >
-	LESS,	 // <
+	MORE_TOKEN,	 // >
+	LESS_TOKEN,	 // <
 	OR,      // |
 	AND,     // &
 

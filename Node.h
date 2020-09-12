@@ -20,6 +20,9 @@ enum node_type {
 	VARIABLE,
 	NUMBER, 
 
+	MORE, // >
+	LESS, // <
+	EQUALITY, // ==
 	ADD, // +
 	SUB, // -
 	MUL, // *

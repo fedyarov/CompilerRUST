@@ -19,8 +19,12 @@ Lexer::Lexer(const char* file)
 void Lexer::split()
 {
 	string temp_token;
+	string::iterator it = code.begin();
+	string::iterator end = code.end();
+	char symbol;
 
-	for (char symbol : code) {
+	for (it; it != end; it++) {
+		symbol = *it;
 		if (is_split_symbol(symbol)) {
 			if (!temp_token.empty()) {
 				Token* new_token = new Token(temp_token);
@@ -28,11 +32,30 @@ void Lexer::split()
 
 				temp_token.clear();
 			}
-			if (symbol != ' ' && symbol != 10 && symbol != 9) {
+			if (symbol != ' ' && symbol != 10 && symbol != 9 && symbol != '=') {
 				temp_token = symbol;
 				Token* new_token = new Token(temp_token);
 				tokens.push_back(new_token);
 				temp_token.clear();
+			}
+			else if (symbol == '=') {
+				it++;
+				char next_sym = *it;
+
+				temp_token = symbol;
+				if (next_sym == '=') {
+					temp_token += next_sym;
+					Token* new_token = new Token(temp_token);
+					tokens.push_back(new_token);
+					temp_token.clear();
+				}
+				else {
+					Token* new_token = new Token(temp_token);
+					tokens.push_back(new_token);
+					temp_token.clear();
+					it--;
+				}
+				
 			}
 		}
 		else {

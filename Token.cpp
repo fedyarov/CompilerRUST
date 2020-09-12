@@ -40,7 +40,10 @@ token_type Token::get_type()
 		return token_type::DOUBLE_POINT;
 	}
 	if (lexeme == "=") {
-		return token_type::EQUALLY;
+		return token_type::SET_TOKEN;
+	}
+	if (lexeme == "==") {
+		return token_type::EQUALITY_TOKEN;
 	}
 	if (lexeme == "+") {
 		return token_type::PLUS;
@@ -76,10 +79,10 @@ token_type Token::get_type()
 		return token_type::SEMICOLON;
 	}
 	if (lexeme == ">") {
-		return token_type::MORE;
+		return token_type::MORE_TOKEN;
 	}
 	if (lexeme == "<") {
-		return token_type::LESS;
+		return token_type::LESS_TOKEN;
 	}
 	if (lexeme == "|") {
 		return token_type::OR;

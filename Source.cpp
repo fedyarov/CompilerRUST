@@ -7,7 +7,7 @@ int main(int argc, char* argv[])
 {
 	char fileName[] = "Tests/test2.txt";
 	Parser parser(fileName);
-
+	
 	create_new_log();
 
 	try {

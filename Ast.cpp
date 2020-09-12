@@ -81,6 +81,18 @@ void Ast::print_recursive(Node* current_node, size_t level)
 		cout_log(")");
 		break;
 	}
+	case node_type::MORE: {
+		cout_log("MORE");
+		break;
+	}
+	case node_type::LESS: {
+		cout_log("LESS");
+		break;
+	}
+	case node_type::EQUALITY: {
+		cout_log("EQUALITY");
+		break;
+	}
 	case node_type::ADD:{
 		cout_log("ADD");
 		break;

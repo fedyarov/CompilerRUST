@@ -89,7 +89,7 @@ Node* Parser::set()
 {
 	Node* identifier_node = identifier();
 	
-	eat(token_type::EQUALLY);
+	eat(token_type::SET_TOKEN);
 	lex->next_token();
 
 	Node* additive_node = additive_expression();
@@ -106,6 +106,8 @@ Node* Parser::selection_statement()
 	lex->next_token();
 
 	Node* expression_node = expression();
+
+	eat(token_type::LBRACE);
 	Node* compound_node = compound_statement();
 
 	Node* selection_node = new Node(node_type::IF, expression_node, compound_node);
@@ -169,8 +171,28 @@ Node* Parser::expression()
 {
 	Node* additive_expression_node = additive_expression();
 
+	if (tryEat(token_type::MORE_TOKEN)) {
+		lex->next_token();
+		Node* additive_second_node = additive_expression();
+		Node* logic_expression_node = new Node(node_type::MORE, additive_expression_node, additive_second_node);
+		return logic_expression_node;
+	}
+	else if (tryEat(token_type::LESS_TOKEN)) {
+		lex->next_token();
+		Node* additive_second_node = additive_expression();
+		Node* logic_expression_node = new Node(node_type::LESS, additive_expression_node, additive_second_node);
+		return logic_expression_node;
+	}
+	else if (tryEat(token_type::EQUALITY_TOKEN)) {
+		lex->next_token();
+		Node* additive_second_node = additive_expression();
+		Node* logic_expression_node = new Node(node_type::EQUALITY, additive_expression_node, additive_second_node);
+		return logic_expression_node;
+	}
+
 	return additive_expression_node;
 }
+
 
 Node* Parser::additive_expression()
 {
@@ -253,12 +275,12 @@ Node* Parser::parenthesized_expression()
 	eat(token_type::LPAR);
 	lex->next_token();
 	
-	Node* expression_node = expression();
+	Node* additive_node = additive_expression();
 
 	eat(token_type::RPAR);
 	lex->next_token();
 
-	return expression_node;
+	return additive_node;
 }
 
 Node* Parser::number()

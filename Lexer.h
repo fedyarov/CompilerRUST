@@ -10,7 +10,7 @@ using namespace std;
 
 class Lexer
 {
-	string code;
+	string code; 
 	vector<Token*> tokens;
 	size_t current_token_index;
 public:

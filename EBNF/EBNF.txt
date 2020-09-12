@@ -4,22 +4,26 @@
 
 <program> ::= <statement>
 
-<statement> ::= <compound_statement> | <declaration> | <expression>, ";"
-				| <selection_statement> | <set> | <cycle_for>
+<statement> ::= <compound_statement> | <declaration> | <selection_statement> 
+				| <set> | <cycle_for>
 
 <declaration> ::= "let", "mut", <identifier>, ";"
 
-<set> ::= <identifier>, "=", <expression>, ";"
+<set> ::= <identifier>, "=", <additive_expression>, ";"
 
 <compound_statement> ::= "{", <statement>, "}"
 
 <selection_statement> ::= "if", <expression>, <compound_statement>,
 						 ["else", <compound_statement>]
+						 | "if", <expression>, ">", <expression>, <compound_statement>,
+						 ["else", <compound_statement>]
+						 | "if", <expression>, "<", <expression>, <compound_statement>,
+						 ["else", <compound_statement>]
 
 <cycle_for> ::= "for", <identifier>, "in", <additive_expression>, "..",
 			  <additive_expression>, <compound_statement>
 
-<expression> ::= <additive_expression>
+<expression> ::= <additive_expression> 
 
 <additive_expression> ::= <multiplicative_expression> 
                         | <multiplicative_expression> "+" <additive_expression>
