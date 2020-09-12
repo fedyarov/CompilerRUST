@@ -20,11 +20,11 @@ void cout_log(string message)
 	}
 }
 
-void cout_log(int num)
+void cout_log(token_type type)
 {
 	ofstream log_file(LOG_PATH, ios::app);
 	if (log_file.is_open()) {
-		log_file << num;
+		log_file << (int)type;
 
 		log_file.close();
 	}

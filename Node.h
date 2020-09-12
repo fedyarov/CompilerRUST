@@ -3,7 +3,7 @@
 
 using namespace std;
 
-enum node_type {
+enum class node_type {
 	PROG, // HEAD OF TREE
 	EXPR, // EXPRESSION
 	DCLRT, // DECLARATION

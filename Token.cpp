@@ -16,7 +16,7 @@ token_type Token::get_type()
 		return token_type::MUT;
 	}
 	if (is_integer(lexeme)) {
-		return token_type::NUMBER_TOKEN;
+		return token_type::NUMBER;
 	}
 	if (lexeme == "true") {
 		return token_type::TRUE;
@@ -25,13 +25,13 @@ token_type Token::get_type()
 		return token_type::FALSE;
 	}
 	if (lexeme == "if") {
-		return token_type::IF_TOKEN;
+		return token_type::IF;
 	}
 	if (lexeme == "else") {
-		return token_type::ELSE_TOKEN;
+		return token_type::ELSE;
 	}
 	if (lexeme == "for") {
-		return token_type::FOR_TOKEN;
+		return token_type::FOR;
 	}
 	if (lexeme == "in") {
 		return token_type::IN;
@@ -40,10 +40,10 @@ token_type Token::get_type()
 		return token_type::DOUBLE_POINT;
 	}
 	if (lexeme == "=") {
-		return token_type::SET_TOKEN;
+		return token_type::SET;
 	}
 	if (lexeme == "==") {
-		return token_type::EQUALITY_TOKEN;
+		return token_type::EQUALITY;
 	}
 	if (lexeme == "+") {
 		return token_type::PLUS;
@@ -79,10 +79,10 @@ token_type Token::get_type()
 		return token_type::SEMICOLON;
 	}
 	if (lexeme == ">") {
-		return token_type::MORE_TOKEN;
+		return token_type::MORE;
 	}
 	if (lexeme == "<") {
-		return token_type::LESS_TOKEN;
+		return token_type::LESS;
 	}
 	if (lexeme == "|") {
 		return token_type::OR;

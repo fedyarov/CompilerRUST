@@ -4,27 +4,27 @@
 
 using namespace std;
 
-enum token_type 
+enum class token_type 
 {
 	IDENTIFIER,
 
 	LET,
 	MUT,
 
-	NUMBER_TOKEN,
+	NUMBER,
 
 	TRUE,
 	FALSE,
 
-	IF_TOKEN,
-	ELSE_TOKEN,
+	IF,
+	ELSE,
 
-	FOR_TOKEN, // for
+	FOR, // for
 	IN, // in
 	DOUBLE_POINT, // ..
 
-	SET_TOKEN, // =
-	EQUALITY_TOKEN, // ==
+	SET, // =
+	EQUALITY, // ==
 
 	PLUS,	 // +
 	MINUS,	 // -
@@ -40,8 +40,8 @@ enum token_type
 	COMMA,   // ,
 	SEMICOLON, // ;
 
-	MORE_TOKEN,	 // >
-	LESS_TOKEN,	 // <
+	MORE,	 // >
+	LESS,	 // <
 	OR,      // |
 	AND,     // &
 

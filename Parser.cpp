@@ -61,11 +61,11 @@ Node* Parser::statement()
 		Node* assign_node = set();
 		return assign_node;
 	}
-	else if (tryEat(token_type::IF_TOKEN)) {
+	else if (tryEat(token_type::IF)) {
 		Node* selection_node = selection_statement();
 		return selection_node;
 	}
-	else if (tryEat(token_type::FOR_TOKEN)) {
+	else if (tryEat(token_type::FOR)) {
 		Node* cycle_for_node = cycle_for();
 		return cycle_for_node;
 	}
@@ -89,7 +89,7 @@ Node* Parser::set()
 {
 	Node* identifier_node = identifier();
 	
-	eat(token_type::SET_TOKEN);
+	eat(token_type::SET);
 	lex->next_token();
 
 	Node* additive_node = additive_expression();
@@ -112,7 +112,7 @@ Node* Parser::selection_statement()
 
 	Node* selection_node = new Node(node_type::IF, expression_node, compound_node);
 
-	if (tryEat(token_type::ELSE_TOKEN)) {
+	if (tryEat(token_type::ELSE)) {
 		lex->next_token();
 
 		Node* compound_else_node = compound_statement();
@@ -171,19 +171,19 @@ Node* Parser::expression()
 {
 	Node* additive_expression_node = additive_expression();
 
-	if (tryEat(token_type::MORE_TOKEN)) {
+	if (tryEat(token_type::MORE)) {
 		lex->next_token();
 		Node* additive_second_node = additive_expression();
 		Node* logic_expression_node = new Node(node_type::MORE, additive_expression_node, additive_second_node);
 		return logic_expression_node;
 	}
-	else if (tryEat(token_type::LESS_TOKEN)) {
+	else if (tryEat(token_type::LESS)) {
 		lex->next_token();
 		Node* additive_second_node = additive_expression();
 		Node* logic_expression_node = new Node(node_type::LESS, additive_expression_node, additive_second_node);
 		return logic_expression_node;
 	}
-	else if (tryEat(token_type::EQUALITY_TOKEN)) {
+	else if (tryEat(token_type::EQUALITY)) {
 		lex->next_token();
 		Node* additive_second_node = additive_expression();
 		Node* logic_expression_node = new Node(node_type::EQUALITY, additive_expression_node, additive_second_node);
@@ -251,7 +251,7 @@ Node* Parser::multiplicative_expression()
 
 Node* Parser::primary_expression()
 {
-	if (tryEat(token_type::NUMBER_TOKEN)) {
+	if (tryEat(token_type::NUMBER)) {
 		Node* number_node = number();
 		
 		return number_node;
@@ -285,7 +285,7 @@ Node* Parser::parenthesized_expression()
 
 Node* Parser::number()
 {
-	eat(token_type::NUMBER_TOKEN);
+	eat(token_type::NUMBER);
 
 	string number_str = lex->current_token()->get_lexeme();
 	lex->next_token();
