@@ -48,6 +48,10 @@ void Generator::ASMCodeForBlocks(Node* node)
 		ASMSet(node);
 		return;
 	}
+	if (node->type == node_type::PRINTLN) {
+		ASMPrintCall(node);
+		return;
+	}
 	
 
 	ASMCodeForBlocks(node->operand1);
@@ -129,6 +133,14 @@ void Generator::ASMAdditive_expression(Node* node)
 	{
 		std::string var_name = node->value;
 		Push(GetASMLocalVar(var_name));
+	}
+}
+
+void Generator::ASMPrintCall(Node* node)
+{
+	if (node->operand1 != nullptr) {
+		ASMAdditive_expression(node->operand1);
+		Raw(tab + "call print\n");
 	}
 }
 

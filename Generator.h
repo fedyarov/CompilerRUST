@@ -62,6 +62,7 @@ private:
 	void ASMCodeForBlocks(Node* node);
 	void ASMSet(Node* node);
 	void ASMAdditive_expression(Node* node);
+	void ASMPrintCall(Node* node);
 
 	void ASMLocalVars();
 	void ASMStackVar(const std::string& value);
