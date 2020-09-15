@@ -14,7 +14,7 @@ class Lexer
 	vector<Token*> tokens;
 	size_t current_token_index;
 public:
-	Lexer(const char* file);
+	Lexer(const string file);
 
 	void split();
 	bool is_split_symbol(char symbol);

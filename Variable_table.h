@@ -9,6 +9,7 @@ using namespace std;
 
 class Variable_table
 {
+public:
 	vector<Variable*> vars;
 public:
 	Variable_table();
@@ -17,6 +18,7 @@ public:
 	void add_variable(Variable* var);
 	Variable* get_variable_by_name(const string& var_name);
 	bool has_variable(const string& var_name);
+	size_t size();
 
 	void designate_variables_recursive(Node* current_node);
 

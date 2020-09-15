@@ -27,6 +27,8 @@ enum class node_type {
 	SUB, // -
 	MUL, // *
 	DIV, // /
+
+	PRINTLN, // println!("{}", id);
 };
 
 class Node

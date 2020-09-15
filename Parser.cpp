@@ -1,6 +1,6 @@
 #include "Parser.h"
 
-Parser::Parser(const char* file_path)
+Parser::Parser(const string file_path)
 {
 	lex = new Lexer(file_path);
 	ast = new Ast();
@@ -25,6 +25,16 @@ void Parser::parse()
 	var_table->print_vars(); // Write all vars to the log file
 }
 
+Node* Parser::getAst()
+{
+	return ast->tree;
+}
+
+Variable_table* Parser::getVariable_table()
+{
+	return var_table;
+}
+
 string Parser::eat(token_type type)
 {
 	if (!tryEat(type)) {
@@ -43,6 +53,10 @@ bool Parser::tryEat(token_type type)
 
 Node* Parser::program()
 {
+	lex->next_token(); // fn
+	lex->next_token(); // main
+	lex->next_token(); // (
+	lex->next_token(); // )
 	Node* statement_node = statement();
 	return statement_node;
 }
@@ -54,7 +68,7 @@ Node* Parser::statement()
 		return compound_node;
 	}
 	else if (tryEat(token_type::LET)) {
-		Node* declaration_node = new Node(node_type::DCLRT, declaration());
+		Node* declaration_node = declaration();
 		return declaration_node;
 	}
 	else if (tryEat(token_type::IDENTIFIER)) {
@@ -69,6 +83,10 @@ Node* Parser::statement()
 		Node* cycle_for_node = cycle_for();
 		return cycle_for_node;
 	}
+	else if (tryEat(token_type::PRINTLN)) {
+		Node* println_node = println();
+		return println_node;
+	}
 }
 
 Node* Parser::declaration() // Создать таблицу переменных
@@ -77,12 +95,10 @@ Node* Parser::declaration() // Создать таблицу переменных
 	eat(token_type::MUT);
 	lex->next_token();
 
-	Node* identifier_node = identifier();
+	Node* set_node = set();
 
-	eat(token_type::SEMICOLON);
-	lex->next_token();
-
-	return identifier_node;
+	Node* declaration_node = new Node(node_type::DCLRT, set_node);
+	return declaration_node;
 }
 
 Node* Parser::set()
@@ -303,6 +319,40 @@ Node* Parser::identifier()
 
 	Node* identifier_node = new Node(node_type::VARIABLE, nullptr, nullptr, variable_str);
 	return identifier_node;
+}
+
+Node* Parser::println()
+{
+	lex->next_token(); // skip "println!"
+
+	eat(token_type::LPAR);
+	lex->next_token();
+
+	eat(token_type::QUOTES);
+	lex->next_token();
+
+	eat(token_type::LBRACE);
+	lex->next_token();
+
+	eat(token_type::RBRACE);
+	lex->next_token();
+
+	eat(token_type::QUOTES);
+	lex->next_token();
+
+	eat(token_type::COMMA);
+	lex->next_token();
+
+	Node* additive_node = additive_expression();
+
+	eat(token_type::RPAR);
+	lex->next_token();
+
+	eat(token_type::SEMICOLON);
+	lex->next_token();
+
+	Node* println_node = new Node(node_type::PRINTLN, additive_node);
+	return println_node;
 }
 
 void Parser::error(const string message)

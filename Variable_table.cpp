@@ -37,14 +37,19 @@ bool Variable_table::has_variable(const string& var_name)
 	return false;
 }
 
+size_t Variable_table::size()
+{
+	return vars.size();
+}
+
 void Variable_table::designate_variables_recursive(Node* current_node)
 {
 	if (current_node == nullptr) {
 		return;
 	}
 
-	if (current_node->type == node_type::DCLRT) { // тут какое-то гавно
-		string name = current_node->operand1->value;
+	if (current_node->type == node_type::DCLRT) { 
+		string name = current_node->operand1->operand1->value;
 		Variable* var = new Variable(name, INTEGER);
 
 		vars.push_back(var);

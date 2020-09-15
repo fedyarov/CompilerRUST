@@ -1,6 +1,6 @@
 #include "Lexer.h"
 
-Lexer::Lexer(const char* file)
+Lexer::Lexer(const string file)
 {
 	ifstream file_with_code(file);
 	if (file_with_code.is_open()) {

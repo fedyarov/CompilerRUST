@@ -5,9 +5,9 @@
 <program> ::= <statement>
 
 <statement> ::= <compound_statement> | <declaration> | <selection_statement> 
-				| <set> | <cycle_for>
+				| <set> | <cycle_for> | <println>
 
-<declaration> ::= "let", "mut", <identifier>, ";"
+<declaration> ::= "let", "mut", <set>
 
 <set> ::= <identifier>, "=", <additive_expression>, ";"
 
@@ -15,15 +15,14 @@
 
 <selection_statement> ::= "if", <expression>, <compound_statement>,
 						 ["else", <compound_statement>]
-						 | "if", <expression>, ">", <expression>, <compound_statement>,
-						 ["else", <compound_statement>]
-						 | "if", <expression>, "<", <expression>, <compound_statement>,
-						 ["else", <compound_statement>]
 
 <cycle_for> ::= "for", <identifier>, "in", <additive_expression>, "..",
 			  <additive_expression>, <compound_statement>
 
 <expression> ::= <additive_expression> 
+			   | <additive_expression>, ">", <additive_expression>
+			   | <additive_expression>, "<", <additive_expression>
+			   | <additive_expression>, "==", <additive_expression>
 
 <additive_expression> ::= <multiplicative_expression> 
                         | <multiplicative_expression> "+" <additive_expression>
@@ -35,8 +34,10 @@
 
 <primary_expression> ::= <number> | <identifier> | <parenthesized_expression>
 
-<parenthesized_expression> ::= "(", <expression>,")"
+<parenthesized_expression> ::= "(", <additive_expression>,")"
 
 <number> ::= число
 
 <identifier> ::= название переменной
+
+<println> ::= "println!", "(", ,"\"", "{", "}", "\"", ",", <additive_expression>, ")", ";"

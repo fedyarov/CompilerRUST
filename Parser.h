@@ -13,10 +13,12 @@ class Parser
 	Ast* ast;
 	Variable_table* var_table;
 public:
-	Parser(const char* file_path);
+	Parser(const string file_path);
 	~Parser();
 
 	void parse();
+	Node* getAst();
+	Variable_table* getVariable_table();
 	string eat(token_type type);
 	bool tryEat(token_type type);
 
@@ -34,6 +36,7 @@ public:
 	Node* parenthesized_expression();
 	Node* number();
 	Node* identifier();
+	Node* println();
 
 	void error(const string message);
 };
