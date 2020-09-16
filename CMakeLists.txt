@@ -3,12 +3,28 @@ cmake_minimum_required(VERSION 3.5)
 project(CompilerRust)
 
 set(SOURCES
-    Source.cpp
+    Ast.cpp
+    Generator.cpp
     Lexer.cpp
+    Log.cpp
+    Node.cpp
+    Parser.cpp
+    Source.cpp
+    Token.cpp
+    Variable.cpp
+    Variable_table.cpp
 )
 
 set(HEADERS
+    Ast.h
+    Generator.h
     Lexer.h
+    Log.h
+    Node.h
+    Parser.h
+    Token.h
+    Variable.h
+    Variable_table.h
 )
 
 add_executable(CompilerRust ${SOURCES} ${HEADERS})
