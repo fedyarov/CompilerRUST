@@ -52,6 +52,16 @@ void Generator::ASMCodeForBlocks(Node* node)
 		ASMPrintCall(node);
 		return;
 	}
+	if (node->type == node_type::IF) {
+		ASMIf(node);
+		return;
+	}
+	if (node->type == node_type::LESS ||
+		node->type == node_type::MORE ||
+		node->type == node_type::EQUALITY) {
+		ASMCondition(node);
+		return;
+	}
 	
 
 	ASMCodeForBlocks(node->operand1);
@@ -143,6 +153,76 @@ void Generator::ASMPrintCall(Node* node)
 		Raw(tab + "call print\n");
 	}
 }
+
+void Generator::ASMIf(Node* node)
+{
+	Node* condition = node->operand1;
+	Node* statement = node->operand2;
+	Node* else_block = node->operand3;
+
+	++label_count;
+	std::string else_label = "ELSE_START" + std::to_string(label_count);
+	std::string end_label = "IF_END" + std::to_string(label_count);
+
+	ASMCodeForBlocks(condition);
+	Pop(eax);
+	Compare(eax, null);
+
+	if (else_block == nullptr)
+	{
+		JumpEqual(end_label);
+		ASMCodeForBlocks(statement);
+		Label(end_label);
+	}
+	else
+	{
+		JumpEqual(else_label);
+		ASMCodeForBlocks(statement);
+		Jump(end_label);
+
+		Label(else_label);
+		ASMCodeForBlocks(else_block);
+		Label(end_label);
+	}
+}
+
+void Generator::ASMCondition(Node* node)
+{
+	Node* op1 = node->operand1;
+	Node* op2 = node->operand2;
+
+	ASMAdditive_expression(op1);
+	Pop(ecx);
+	ASMAdditive_expression(op2);
+	Pop(edx);
+	Compare(ecx, edx);
+
+	++label_count;
+	std::string label_if_not_equal = "COMPARE_FALSE" + std::to_string(label_count);
+	std::string label_comp_end = "COMPARE_END" + std::to_string(label_count);
+
+	if (node->type == node_type::LESS)
+	{
+		JumpGreaterEqual(label_if_not_equal);
+	}
+	else if (node->type == node_type::MORE)
+	{
+		JumpLessEqual(label_if_not_equal);
+	}
+	else if (node->type == node_type::EQUALITY)
+	{
+		JumpNotEqual(label_if_not_equal);
+	}
+
+	Push(one);
+	Jump(label_comp_end);
+	Label(label_if_not_equal);
+	Push(null);
+	Label(label_comp_end);
+
+	return;
+}
+
 
 void Generator::ASMLocalVars()
 {

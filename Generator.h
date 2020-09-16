@@ -29,6 +29,7 @@ const std::string ebx("ebx");
 const std::string ecx("ecx");
 const std::string edx("edx");
 const std::string null("0");
+const std::string one("1");
 
 
 enum class AssemblerPart {
@@ -63,6 +64,8 @@ private:
 	void ASMSet(Node* node);
 	void ASMAdditive_expression(Node* node);
 	void ASMPrintCall(Node* node);
+	void ASMIf(Node* node);
+	void ASMCondition(Node* node);
 
 	void ASMLocalVars();
 	void ASMStackVar(const std::string& value);
