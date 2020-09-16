@@ -66,6 +66,7 @@ private:
 	void ASMPrintCall(Node* node);
 	void ASMIf(Node* node);
 	void ASMCondition(Node* node);
+	void ASMFor(Node* node);
 
 	void ASMLocalVars();
 	void ASMStackVar(const std::string& value);

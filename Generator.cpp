@@ -62,6 +62,10 @@ void Generator::ASMCodeForBlocks(Node* node)
 		ASMCondition(node);
 		return;
 	}
+	if (node->type == node_type::FOR) {
+		ASMFor(node);
+		return;
+	}
 	
 
 	ASMCodeForBlocks(node->operand1);
@@ -223,6 +227,53 @@ void Generator::ASMCondition(Node* node)
 	return;
 }
 
+void Generator::ASMFor(Node* node)
+{
+	++label_count;
+	std::string start_label = "START_FOR" + std::to_string(label_count);
+	std::string end_label = "END_FOR" + std::to_string(label_count);
+	++label_count;
+	std::string label_if_not_equal = "COMPARE_FALSE" + std::to_string(label_count);
+	std::string label_comp_end = "COMPARE_END" + std::to_string(label_count);
+
+	label_stack.push(end_label);
+
+	Node* var = node->operand1;
+	Node* init_val = node->operand2; //range starting additive_expression
+	Node* end_val = node->operand3;	 //ranfe ending additive_expression
+	Node* statement = node->operand4;
+
+	ASMAdditive_expression(init_val);
+	Pop(eax);
+	Move(GetASMLocalVar(var->value), eax);
+
+	Label(start_label);
+
+	Push(GetASMLocalVar(var->value));
+	Pop(ecx);
+	ASMAdditive_expression(end_val);
+	Pop(edx);
+	Compare(ecx, edx);
+	JumpGreaterEqual(label_if_not_equal);
+	Push(one);
+	Jump(label_comp_end);
+	Label(label_if_not_equal);
+	Push(null);
+	Label(label_comp_end);
+
+	Pop(eax);
+	Compare(eax, null);
+	JumpEqual(end_label);
+	ASMCodeForBlocks(statement);
+	Push(GetASMLocalVar(var->value));
+	Pop(eax);
+	Add(eax, "1");
+	Move(GetASMLocalVar(var->value), eax);
+	Jump(start_label);
+	Label(end_label);
+
+	label_stack.pop();
+}
 
 void Generator::ASMLocalVars()
 {
