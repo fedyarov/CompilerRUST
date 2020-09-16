@@ -1,7 +1,5 @@
 *.sln 
 *.vcxproj 
 *.vcxproj.* 
-log.txt
-/Tests
 /.vs 
 /Debug 

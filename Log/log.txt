@@ -1,0 +1,281 @@
+------ TOKENS ------
+fn WITH TYPE 0
+main WITH TYPE 0
+( WITH TYPE 17
+) WITH TYPE 18
+{ WITH TYPE 19
+let WITH TYPE 1
+mut WITH TYPE 2
+var1 WITH TYPE 0
+= WITH TYPE 11
+0 WITH TYPE 3
+; WITH TYPE 23
+let WITH TYPE 1
+mut WITH TYPE 2
+var2 WITH TYPE 0
+= WITH TYPE 11
+10 WITH TYPE 3
+; WITH TYPE 23
+let WITH TYPE 1
+mut WITH TYPE 2
+var3 WITH TYPE 0
+= WITH TYPE 11
+98 WITH TYPE 3
+; WITH TYPE 23
+let WITH TYPE 1
+mut WITH TYPE 2
+i WITH TYPE 0
+= WITH TYPE 11
+0 WITH TYPE 3
+; WITH TYPE 23
+var1 WITH TYPE 0
+= WITH TYPE 11
+( WITH TYPE 17
+( WITH TYPE 17
+( WITH TYPE 17
+( WITH TYPE 17
+25 WITH TYPE 3
+- WITH TYPE 14
+5 WITH TYPE 3
+) WITH TYPE 18
+* WITH TYPE 15
+5 WITH TYPE 3
+) WITH TYPE 18
+/ WITH TYPE 16
+2 WITH TYPE 3
+) WITH TYPE 18
++ WITH TYPE 13
+50 WITH TYPE 3
+) WITH TYPE 18
+- WITH TYPE 14
+var3 WITH TYPE 0
+; WITH TYPE 23
+println! WITH TYPE 28
+( WITH TYPE 17
+" WITH TYPE 21
+{ WITH TYPE 19
+} WITH TYPE 20
+" WITH TYPE 21
+, WITH TYPE 22
+var1 WITH TYPE 0
+) WITH TYPE 18
+; WITH TYPE 23
+for WITH TYPE 8
+i WITH TYPE 0
+in WITH TYPE 9
+1 WITH TYPE 3
+.. WITH TYPE 10
+5 WITH TYPE 3
+{ WITH TYPE 19
+var1 WITH TYPE 0
+= WITH TYPE 11
+var1 WITH TYPE 0
+* WITH TYPE 15
+2 WITH TYPE 3
+; WITH TYPE 23
+println! WITH TYPE 28
+( WITH TYPE 17
+" WITH TYPE 21
+{ WITH TYPE 19
+} WITH TYPE 20
+" WITH TYPE 21
+, WITH TYPE 22
+var1 WITH TYPE 0
+) WITH TYPE 18
+; WITH TYPE 23
+} WITH TYPE 20
+if WITH TYPE 6
+var1 WITH TYPE 0
+== WITH TYPE 12
+32 WITH TYPE 3
+{ WITH TYPE 19
+for WITH TYPE 8
+i WITH TYPE 0
+in WITH TYPE 9
+0 WITH TYPE 3
+.. WITH TYPE 10
+3 WITH TYPE 3
+{ WITH TYPE 19
+var1 WITH TYPE 0
+= WITH TYPE 11
+var1 WITH TYPE 0
+/ WITH TYPE 16
+2 WITH TYPE 3
+; WITH TYPE 23
+println! WITH TYPE 28
+( WITH TYPE 17
+" WITH TYPE 21
+{ WITH TYPE 19
+} WITH TYPE 20
+" WITH TYPE 21
+, WITH TYPE 22
+var1 WITH TYPE 0
+) WITH TYPE 18
+; WITH TYPE 23
+} WITH TYPE 20
+} WITH TYPE 20
+if WITH TYPE 6
+var2 WITH TYPE 0
+< WITH TYPE 25
+var1 WITH TYPE 0
+* WITH TYPE 15
+2 WITH TYPE 3
+{ WITH TYPE 19
+println! WITH TYPE 28
+( WITH TYPE 17
+" WITH TYPE 21
+{ WITH TYPE 19
+} WITH TYPE 20
+" WITH TYPE 21
+, WITH TYPE 22
+var2 WITH TYPE 0
+) WITH TYPE 18
+; WITH TYPE 23
+} WITH TYPE 20
+else WITH TYPE 7
+{ WITH TYPE 19
+let WITH TYPE 1
+mut WITH TYPE 2
+temp WITH TYPE 0
+= WITH TYPE 11
+var2 WITH TYPE 0
+; WITH TYPE 23
+var2 WITH TYPE 0
+= WITH TYPE 11
+var1 WITH TYPE 0
+; WITH TYPE 23
+var1 WITH TYPE 0
+= WITH TYPE 11
+temp WITH TYPE 0
+; WITH TYPE 23
+println! WITH TYPE 28
+( WITH TYPE 17
+" WITH TYPE 21
+{ WITH TYPE 19
+} WITH TYPE 20
+" WITH TYPE 21
+, WITH TYPE 22
+var1 WITH TYPE 0
+) WITH TYPE 18
+; WITH TYPE 23
+println! WITH TYPE 28
+( WITH TYPE 17
+" WITH TYPE 21
+{ WITH TYPE 19
+} WITH TYPE 20
+" WITH TYPE 21
+, WITH TYPE 22
+var2 WITH TYPE 0
+) WITH TYPE 18
+; WITH TYPE 23
+} WITH TYPE 20
+} WITH TYPE 20
+
+------ AST ------
++-SEQ
+  +-DCLRT
+    +-SET
+      +-VARIABLE (var1)
+      +-NUMBER (0)
+  +-SEQ
+    +-DCLRT
+      +-SET
+        +-VARIABLE (var2)
+        +-NUMBER (10)
+    +-SEQ
+      +-DCLRT
+        +-SET
+          +-VARIABLE (var3)
+          +-NUMBER (98)
+      +-SEQ
+        +-DCLRT
+          +-SET
+            +-VARIABLE (i)
+            +-NUMBER (0)
+        +-SEQ
+          +-SET
+            +-VARIABLE (var1)
+            +-SUB
+              +-ADD
+                +-DIV
+                  +-MUL
+                    +-SUB
+                      +-NUMBER (25)
+                      +-NUMBER (5)
+                    +-NUMBER (5)
+                  +-NUMBER (2)
+                +-NUMBER (50)
+              +-VARIABLE (var3)
+          +-SEQ
+            +-PRINTLN
+              +-VARIABLE (var1)
+            +-SEQ
+              +-FOR
+                +-VARIABLE (i)
+                +-NUMBER (1)
+                +-NUMBER (5)
+                +-SEQ
+                  +-SET
+                    +-VARIABLE (var1)
+                    +-MUL
+                      +-VARIABLE (var1)
+                      +-NUMBER (2)
+                  +-SEQ
+                    +-PRINTLN
+                      +-VARIABLE (var1)
+              +-SEQ
+                +-IF
+                  +-EQUALITY
+                    +-VARIABLE (var1)
+                    +-NUMBER (32)
+                  +-SEQ
+                    +-FOR
+                      +-VARIABLE (i)
+                      +-NUMBER (0)
+                      +-NUMBER (3)
+                      +-SEQ
+                        +-SET
+                          +-VARIABLE (var1)
+                          +-DIV
+                            +-VARIABLE (var1)
+                            +-NUMBER (2)
+                        +-SEQ
+                          +-PRINTLN
+                            +-VARIABLE (var1)
+                +-SEQ
+                  +-IF
+                    +-LESS
+                      +-VARIABLE (var2)
+                      +-MUL
+                        +-VARIABLE (var1)
+                        +-NUMBER (2)
+                    +-SEQ
+                      +-PRINTLN
+                        +-VARIABLE (var2)
+                    +-ELSE
+                      +-SEQ
+                        +-DCLRT
+                          +-SET
+                            +-VARIABLE (temp)
+                            +-VARIABLE (var2)
+                        +-SEQ
+                          +-SET
+                            +-VARIABLE (var2)
+                            +-VARIABLE (var1)
+                          +-SEQ
+                            +-SET
+                              +-VARIABLE (var1)
+                              +-VARIABLE (temp)
+                            +-SEQ
+                              +-PRINTLN
+                                +-VARIABLE (var1)
+                              +-SEQ
+                                +-PRINTLN
+                                  +-VARIABLE (var2)
+
+------ VARIABLES ------
+INTEGER var1
+INTEGER var2
+INTEGER var3
+INTEGER i
+INTEGER temp
