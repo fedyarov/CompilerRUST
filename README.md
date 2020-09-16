@@ -47,6 +47,27 @@
 						                ["else", <compound_statement>]
     ...
 
+В итоге для фрагмента кода: 
+
+	if var2 < var1*2 {
+		println!("{}",var2);
+	}
+	
+Получим следующее *AST*:
+
+	+-SEQ
+          +-IF
+            +-LESS
+              +-VARIABLE (var2)
+              +-MUL
+                +-VARIABLE (var1)
+                +-NUMBER (2)
+            +-SEQ
+              +-PRINTLN
+                +-VARIABLE (var2)
+		
+`Примечание:` узел `SEQuence` необходим для хранения в нем *последовательной* инструкции. 
+	
 ## Генератор кода
 Объект класса [Generator](https://github.com/fedyarov/CompilerRUST/blob/master/Generator.h "Generator.h") создается в функции `int main(int argc, char* argv[])` и там же 
 вызывается его метод `Generate`.
