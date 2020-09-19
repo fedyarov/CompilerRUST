@@ -3,7 +3,7 @@
 #include <iostream>
 #include "Token.h"
 
-#define LOG_PATH "Log/log.txt"
+#define LOG_PATH "Tests/condition_test/log.txt"
 
 using namespace std;
 

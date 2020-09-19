@@ -1,0 +1,123 @@
+------ TOKENS ------
+fn WITH TYPE 0
+main WITH TYPE 0
+( WITH TYPE 17
+) WITH TYPE 18
+{ WITH TYPE 19
+let WITH TYPE 1
+mut WITH TYPE 2
+var1 WITH TYPE 0
+= WITH TYPE 11
+2 WITH TYPE 3
+; WITH TYPE 23
+let WITH TYPE 1
+mut WITH TYPE 2
+i WITH TYPE 0
+= WITH TYPE 11
+0 WITH TYPE 3
+; WITH TYPE 23
+let WITH TYPE 1
+mut WITH TYPE 2
+j WITH TYPE 0
+= WITH TYPE 11
+0 WITH TYPE 3
+; WITH TYPE 23
+for WITH TYPE 8
+i WITH TYPE 0
+in WITH TYPE 9
+1 WITH TYPE 3
+.. WITH TYPE 10
+5 WITH TYPE 3
+{ WITH TYPE 19
+var1 WITH TYPE 0
+= WITH TYPE 11
+var1 WITH TYPE 0
+* WITH TYPE 15
+2 WITH TYPE 3
+; WITH TYPE 23
+println! WITH TYPE 28
+( WITH TYPE 17
+" WITH TYPE 21
+{ WITH TYPE 19
+} WITH TYPE 20
+" WITH TYPE 21
+, WITH TYPE 22
+var1 WITH TYPE 0
+) WITH TYPE 18
+; WITH TYPE 23
+for WITH TYPE 8
+j WITH TYPE 0
+in WITH TYPE 9
+0 WITH TYPE 3
+.. WITH TYPE 10
+2 WITH TYPE 3
+{ WITH TYPE 19
+var1 WITH TYPE 0
+= WITH TYPE 11
+var1 WITH TYPE 0
++ WITH TYPE 13
+1 WITH TYPE 3
+; WITH TYPE 23
+println! WITH TYPE 28
+( WITH TYPE 17
+" WITH TYPE 21
+{ WITH TYPE 19
+} WITH TYPE 20
+" WITH TYPE 21
+, WITH TYPE 22
+var1 WITH TYPE 0
+) WITH TYPE 18
+; WITH TYPE 23
+} WITH TYPE 20
+} WITH TYPE 20
+} WITH TYPE 20
+
+------ AST ------
++-SEQ
+  +-DCLRT
+    +-SET
+      +-VARIABLE (var1)
+      +-NUMBER (2)
+  +-SEQ
+    +-DCLRT
+      +-SET
+        +-VARIABLE (i)
+        +-NUMBER (0)
+    +-SEQ
+      +-DCLRT
+        +-SET
+          +-VARIABLE (j)
+          +-NUMBER (0)
+      +-SEQ
+        +-FOR
+          +-VARIABLE (i)
+          +-NUMBER (1)
+          +-NUMBER (5)
+          +-SEQ
+            +-SET
+              +-VARIABLE (var1)
+              +-MUL
+                +-VARIABLE (var1)
+                +-NUMBER (2)
+            +-SEQ
+              +-PRINTLN
+                +-VARIABLE (var1)
+              +-SEQ
+                +-FOR
+                  +-VARIABLE (j)
+                  +-NUMBER (0)
+                  +-NUMBER (2)
+                  +-SEQ
+                    +-SET
+                      +-VARIABLE (var1)
+                      +-ADD
+                        +-VARIABLE (var1)
+                        +-NUMBER (1)
+                    +-SEQ
+                      +-PRINTLN
+                        +-VARIABLE (var1)
+
+------ VARIABLES ------
+INTEGER var1
+INTEGER i
+INTEGER j

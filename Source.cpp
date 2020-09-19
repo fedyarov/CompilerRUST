@@ -5,7 +5,7 @@ using namespace std;
 
 int main(int argc, char* argv[]) 
 {
-	string fileName = "Tests/HelloWorld.rs";
+	string fileName = "Tests/condition_test/Condition.rs";
 	Generator generator(fileName);
 
 	create_new_log();
