@@ -81,9 +81,13 @@
 
 При помощи рекурсии генератор кода обходит созданное парсером *AST* и добавляет необходимые строчки ассемблерного кода в файл `*.asm`.
 
-## Пример работы программы
-Полноценный пример исходного кода на языке Rust находится в файле [HelloWorld.rs](https://github.com/fedyarov/CompilerRUST/blob/master/Tests/HelloWorld.rs "Исходный код").
+## Примеры работы программы
+Все примеры с исходным кодом, лог файлом, и сгенерированным ассемблерным кодом можно просмотреть в папке [Tests](https://github.com/fedyarov/CompilerRUST/tree/master/Tests).
 
-В файле [log.txt](https://github.com/fedyarov/CompilerRUST/blob/master/Log/log.txt "log.txt") можно отследить все этапы компиляции и выходные данные этих этапов.
+В файлах `*.rs` находится исходный код на языке Rust. Например, [Condition.rs](https://github.com/fedyarov/CompilerRUST/blob/master/Tests/condition_test/Condition.rs).
 
-И наконец, сгенерированный ассемблерный код в файле [HelloWorld.asm](https://github.com/fedyarov/CompilerRUST/blob/master/Tests/HelloWorld.asm "Ассемблерный код").
+В файле `log.txt` можно отследить выходные данные всех этапов работы компилятора. Например, 
+[log.txt](https://github.com/fedyarov/CompilerRUST/blob/master/Tests/condition_test/log.txt) для программы строчкой выше.
+
+И наконец, в файле `*.asm` находится сгенерированный ассемблерный код. [Condition.asm](https://github.com/fedyarov/CompilerRUST/blob/master/Tests/condition_test/Condition.asm)
+для файла, приведенного в пример выше.
